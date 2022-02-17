@@ -35,4 +35,53 @@ var game = function(){
       moveBar();
       checkIfLost();
   }
+  
+    function checkIfLost(){
+        if(ball.offsetLeft >= width){
+            stop();
+            console.log("punto player 1");
+        }
+        if(ball.offsetLeft <= 0){
+            stop();
+            console.log("punto player 2");
+        }
+    }
+
+    function moveBall(){
+        checkStateBall();
+        switch(ball.state){
+            case 1: // derecha, abajo
+                ball.style.left = (ball.offsetLeft + movement) +"px";
+                ball.style.top = (ball.offsetTop + movement) +"px";
+                break;
+            case 2: // derecha, arriba
+                ball.style.left = (ball.offsetLeft + movement) +"px";
+                ball.style.top = (ball.offsetTop - movement) +"px";
+                break;
+            case 3: // izquierda, abajo
+                ball.style.left = (ball.offsetLeft - movement) +"px";
+                ball.style.top = (ball.offsetTop + movement) +"px";
+                break;
+            case 4: // izquierda, arriba
+                ball.style.left = (ball.offsetLeft - movement) +"px";
+                ball.style.top = (ball.offsetTop - movement) +"px";
+                break;
+        }
+    }
+  
+      function moveBar(){
+        if(player1.keyPress){
+            if(player1.keyCode == 81 && bar1.offsetTop >=0)
+                bar1.style.top = (bar1.offsetTop - movementBar) + "px";
+            if(player1.keyCode == 65 && (bar1.offsetTop + bar1.clientHeight)<=height)
+                bar1.style.top = (bar1.offsetTop + movementBar) + "px";
+            
+        }
+        if(player2.keyPress){
+            if(player2.keyCode == 79 && bar2.offsetTop>=0)
+                bar2.style.top = (bar2.offsetTop - movementBar) +"px";
+            if(player2.keyCode == 76 && (bar2.offsetTop + bar2.clientHeight)<=height)
+                bar2.style.top = (bar2.offsetTop + movementBar) +"px";
+        }
+    }
 }
